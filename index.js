@@ -12,6 +12,9 @@ app.get('/:y/:m/:d/:t', function(req, res) {
 			let meals = list.eq(2).find('div').html().trim().split('<br>');
 			let mealArr = [];
 			meals.forEach(function(e) {
+				if(e.length <= 0) {
+					return;
+				}
 				mealArr.push(e.replace(/&#x(.{4});/g, function(match) {
 					return String.fromCharCode(parseInt(match.substr(3, 4), 16));
 				}));
