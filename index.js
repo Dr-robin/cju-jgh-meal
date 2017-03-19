@@ -12,14 +12,9 @@ app.get('/:y/:m/:d/:t', function(req, res) {
 			let meals = list.eq(2).find('div').html().trim().split('<br>');
 			let mealArr = [];
 			meals.forEach(function(e) {
-				if(e.length < 8) {
-					return;
-				}
-				let meal = '';
-				for(let i = 0; i < e.length / 8; i++) {
-					meal += String.fromCharCode(parseInt(e.substr((i * 8) + 3, 4), 16));
-				}
-				mealArr.push(meal);
+				mealArr.push(e.replace(/&#x(.{4});/g, function(match) {
+					return String.fromCharCode(parseInt(match.substr(3, 4), 16));
+				}));
 			});
 			res.json({cal: kcal, meal: mealArr});
 		}
