@@ -2,7 +2,7 @@
 Jeju Jungang Girl's High School Meal Parser
 
 ## Usage
-For example: http://junganggh.planet.moe/2017/3/20/lunch
+For example: http://mb.planet.moe/2017/3/20/lunch
 /yyyy/m/d/(lunch|dinner)
 
 ## Response
