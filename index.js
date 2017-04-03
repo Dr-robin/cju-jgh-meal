@@ -4,8 +4,9 @@ const cheerio = require('cheerio');
 const app = express();
 
 function filter(s) {
-	s = s.replace(/\(여,1\)/, '');
-	s = s.replace(/\(1여\)/, '');
+	s = s.replace(/\(여,1\)/g, '');
+	s = s.replace(/\(1여\)/g, '');
+	console.log(s);
 	return s;
 }
 app.get('/:y/:m/:d/:t', function(req, res) {
@@ -20,9 +21,9 @@ app.get('/:y/:m/:d/:t', function(req, res) {
 				if(e.length <= 0) {
 					return;
 				}
-				mealArr.push(e.replace(/&#x(.{4});/g, function(match) {
-					return filter(String.fromCharCode(parseInt(match.substr(3, 4), 16)));
-				}));
+				mealArr.push(filter(e.replace(/&#x(.{4});/g, function(match) {
+					return String.fromCharCode(parseInt(match.substr(3, 4), 16));
+				})));
 			});
 			res.json({cal: kcal, meal: mealArr});
 		}
