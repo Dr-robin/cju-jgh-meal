@@ -6,6 +6,7 @@ const app = express();
 function filter(s) {
 	s = s.replace(/\(여,1\)/, '');
 	s = s.replace(/\(1여\)/, '');
+	return s;
 }
 app.get('/:y/:m/:d/:t', function(req, res) {
 	request(`http://jungang.jje.hs.kr/jungang-h/food/${req.params.y}/${req.params.m}/${req.params.d}/${req.params.t}`, function(err, data, body) {
